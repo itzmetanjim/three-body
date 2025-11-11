@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sketch</title>
+    <title>Three-Body Problem Plot</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -13,6 +13,36 @@
   </head>
 
   <body>
+  <div align="center" style="width:50%;">
+    <!--<h2>Three Body Problem Plot</h2>
+    <h3>By Tanjim Kamal</h3>-->
+  </div>
+    
+    <div  style="position:absolute; left:50%; top:0%;">
+
+    <span style="color:rgba(100,100,100,1);">Drag to move objects<br>
+    Double click to create new objects<br>
+    Right click to remove objects</span>
+      <h2>What is this?</h2>
+      <p>This is a simulation of three-body problem with a plot.</p>
+      <ul>
+        <li>Each point here corresponds to a point object with mass <code>m2</code></li>
+        <li>The pixel is colored depending on which "big" object it collides with.</li>
+        <li>For this, each "big" object has mass <code>m1</code> and a radius <code>r1</code></li>
+        <li>Big objects have gravity</li>
+        <li>But big objects do not move, they only exert forces on the small object</li>
+        <li>A small object does not affect other small objects.</li>
+      </ul>
+      <h2>Parameters</h2>
+      <ul>
+        <li><code>m1</code>: Mass of each big object<div align="right"><input type="text" placeholder="10"></input></div></li>
+        <li><code>r1</code>: Radius of each big object<div align="right"><input type="text" placeholder="30"></input></div></li>
+        <li><code>m2</code>: Mass of each small object (pixel) <div align="right"><input type="text" placeholder="1"></input></div></li>
+        <li><code>G</code>: Gravitational constant    <div align="right"><input type="text" placeholder="0.6"></input></div></li>
+      </ul>
+      <button>Update parameters (will reload)</button>
+    </div>
+
     <script src="sketch.js"></script>
   </body>
 </html>

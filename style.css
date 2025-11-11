@@ -6,3 +6,70 @@ html, body {
 canvas {
   display: block;
 }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Mono','RobotoMono Nerd Font', 'Iosevka', 'Fira Code', monospace;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+}
+p.subtle {
+  color: #808080;
+  font-size: 0.9em;
+  font-style:italic;
+}
+input{
+  background-color: #252526;
+  color: #d4d4d4;
+  border: 1px solid #3c3c3c;
+  padding: 4px;
+  font-family: 'Roboto Mono','RobotoMono Nerd Font', 'Iosevka', 'Fira Code', monospace;
+  font-size: 1em;
+}
+
+button{
+  background-color: #303036;
+  color: #d4d4d4;
+  border: 1px solid #3c3c3c;
+  padding: 4px;
+  margin: 4px 0;
+  font-family: 'Roboto Mono','RobotoMono Nerd Font', 'Iosevka', 'Fira Code', monospace;
+  font-size: 1em;
+}
+.small{
+  font-size: 0.8em;
+}
+.displaynone{
+  display: none;
+}
+#benchmark{
+  height: 250px;
+/*  background-color: #252526; */
+  padding: 8px;
+  /*border: 1px solid #3c3c3c;*/
+  margin-top: 8px;
+}
+#fpsChart{
+  max-width: 100%;
+  height: 100%;
+}
+button:hover{
+  background-color: #45454a;
+  cursor: pointer;
+}
+button:active{
+  background-color: #2a2a2f;
+}
+a{
+  color: #4fc3f7;
+}
+a:visited {
+  color: #81c784;
+}
+a:hover {
+  color: #ffb74d;
+}
+
+canvas {
+  display: block;
+}
