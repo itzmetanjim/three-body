@@ -60,6 +60,16 @@
           <input type="text" id="DragInput" placeholder="0.99">
           <p class="subtle">Drag factor applied each timestep (1 = no drag).</p>
         </li>
+        <li>
+          <code>dT</code>:
+          <input type="text" id="dTInput" placeholder="1">
+          <p class="subtle">Time step for the simulation. Increase to make it faster, decrease for accuracy.</p>
+        </li>
+        <li>
+          <code>canvasSize</code>:
+          <input type="text" id="canvasSizeInput" placeholder="300">
+          <p class="subtle">Size of the canvas in pixels (canvas is square).</p>
+        </li>
       </ul>
       <button onclick="updateParameters()">Update parameters (will reload)</button>
     </div>

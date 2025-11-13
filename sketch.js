@@ -46,12 +46,14 @@ var m2_param=currentURLParams.get("m2");
 var G_param=currentURLParams.get("G");
 var dT_param=currentURLParams.get("dT");
 var Drag_param=currentURLParams.get("Drag");
+var canvasSize_param=currentURLParams.get("canvasSize");
 var r1=r1_param!==null?parseFloat(r1_param):30
 var m1=m1_param!==null?parseFloat(m1_param):10
 var m2=m2_param!==null?parseFloat(m2_param):1
 var G=G_param!==null?parseFloat(G_param):0.6
 var dT=dT_param!==null?parseFloat(dT_param):1
 var Drag=Drag_param!==null?parseFloat(Drag_param):1
+var canvasSize=canvasSize_param!==null?parseInt(canvasSize_param):300
 
 var smobs = []
 var print = console.log
