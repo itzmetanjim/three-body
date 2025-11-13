@@ -59,7 +59,7 @@ var smobs = []
 var print = console.log
 var pixelColors = []
 function setup() {
-  createCanvas(300, 300);
+  createCanvas(canvasSize, canvasSize);
   //ensure pixels[] maps 1:1 to canvas
   pixelDensity(1);
   background(30);

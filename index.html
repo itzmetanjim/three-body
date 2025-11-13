@@ -57,7 +57,7 @@
         </li>
         <li>
           <code>Drag</code>:
-          <input type="text" id="DragInput" placeholder="0.99">
+          <input type="text" id="DragInput" placeholder="1">
           <p class="subtle">Drag factor applied each timestep (1 = no drag).</p>
         </li>
         <li>
@@ -81,13 +81,17 @@
         const r1 = document.getElementById('r1Input').value || '30';
         const m2 = document.getElementById('m2Input').value || '1';
         const G = document.getElementById('GInput').value || '0.6';
-        const Drag = document.getElementById('DragInput').value || '0.99';
+        const Drag = document.getElementById('DragInput').value || '1';
+        const dT = document.getElementById('dTInput').value || '1';
+        const canvasSize = document.getElementById('canvasSizeInput').value || '300';
         const url = new URL(window.location.href);
         url.searchParams.set('m1', m1);
         url.searchParams.set('r1', r1);
         url.searchParams.set('m2', m2);
         url.searchParams.set('G', G);
         url.searchParams.set('Drag', Drag);
+        url.searchParams.set('dT', dT);
+        url.searchParams.set('canvasSize', canvasSize);
         window.location.href = url.toString();
       }
       
@@ -98,6 +102,9 @@
         if (params.has('m2')) document.getElementById('m2Input').value = params.get('m2');
         if (params.has('G')) document.getElementById('GInput').value = params.get('G');
         if (params.has('Drag')) document.getElementById('DragInput').value = params.get('Drag');
+        if (params.has('dT')) document.getElementById('dTInput').value = params.get('dT');
+        if (params.has('canvasSize')) document.getElementById('canvasSizeInput').value = params.get('canvasSize');
+      
       });
     </script>
   </body>
