@@ -34,35 +34,36 @@
         <li>A small object does not affect other small objects.</li>
       </ul>
       <h2>Parameters</h2>
+      <button onclick="updateParameters()">Update parameters (will reload)</button>
       <ul>
         <li>
           <code>m1</code>:
-          <input type="text" id="m1Input" placeholder="10">
+          <input type="text" id="m1Input" placeholder="10"><button onclick="updateParameters()">Update</button>
           <p class="subtle">Mass of each big object.</p>
         </li>
         <li>
           <code>r1</code>:
-          <input type="text" id="r1Input" placeholder="30">
+          <input type="text" id="r1Input" placeholder="30"><button onclick="updateParameters()">Update</button>
           <p class="subtle">Radius of each big object (in pixels).</p>
         </li>
         <li>
           <code>m2</code>:
-          <input type="text" id="m2Input" placeholder="1">
+          <input type="text" id="m2Input" placeholder="1"><button onclick="updateParameters()">Update</button>
           <p class="subtle">Mass of each small object (pixel).</p>
         </li>
         <li>
           <code>G</code>:
-          <input type="text" id="GInput" placeholder="0.6">
+          <input type="text" id="GInput" placeholder="0.6"><button onclick="updateParameters()">Update</button>
           <p class="subtle">Gravitational constant (big G).</p>
         </li>
         <li>
           <code>Drag</code>:
-          <input type="text" id="DragInput" placeholder="1">
+          <input type="text" id="DragInput" placeholder="1"><button onclick="updateParameters()">Update</button>
           <p class="subtle">Drag factor applied each timestep (1 = no drag).</p>
         </li>
         <li>
           <code>dT</code>:
-          <input type="text" id="dTInput" placeholder="10">
+          <input type="text" id="dTInput" placeholder="10"><button onclick="updateParameters()">Update</button>
           <p class="subtle">Time step for the simulation. Increase for speed , decrease for accuracy.<br>
           Too much dT creates ripple artifacts. The time taken to converge decreases linearly when this increases.<br>
           Recommended is 10 normally, 20 for faster simulations and 1-5 for accuracy.</p>
@@ -70,8 +71,12 @@
         </li>
         <li>
           <code>canvasSize</code>:
-          <input type="text" id="canvasSizeInput" placeholder="300">
+          <input type="text" id="canvasSizeInput" placeholder="300"><button onclick="updateParameters()">Update</button>
           <p class="subtle">Size of the canvas in pixels (canvas is square). <strong>The time taken increases cubicly with this parameter.</strong></p>
+        </li>
+        <li>
+          Chaos mode: <input type="checkbox" id="chaosinput"></input><button onclick="updateParameters()">Update</button>
+          <p class="subtle">Make planets attract each other as well as the particles. The particles don't attract other particles or the big objects.</p>
         </li>
       </ul>
       <button onclick="updateParameters()">Update parameters (will reload)</button>
@@ -87,7 +92,9 @@
         const Drag = document.getElementById('DragInput').value || '1';
         const dT = document.getElementById('dTInput').value || '10';
         const canvasSize = document.getElementById('canvasSizeInput').value || '300';
+        const chaos = document.getElementById('chaosinput').checked ? '1' : '0';
         const url = new URL(window.location.href);
+
         url.searchParams.set('m1', m1);
         url.searchParams.set('r1', r1);
         url.searchParams.set('m2', m2);
@@ -95,6 +102,9 @@
         url.searchParams.set('Drag', Drag);
         url.searchParams.set('dT', dT);
         url.searchParams.set('canvasSize', canvasSize);
+        if(chaos==='1'){
+          url.searchParams.set('chaos','1');  
+        } else if(url.searchParams.has('chaos')) {url.searchParams.delete('chaos');}
         window.location.href = url.toString();
       }
       
@@ -107,6 +117,8 @@
         if (params.has('Drag')) document.getElementById('DragInput').value = params.get('Drag');
         if (params.has('dT')) document.getElementById('dTInput').value = params.get('dT');
         if (params.has('canvasSize')) document.getElementById('canvasSizeInput').value = params.get('canvasSize');
+        if (params.has('chaos')) document.getElementById('chaosinput').checked = true;
+
       
       });
     </script>

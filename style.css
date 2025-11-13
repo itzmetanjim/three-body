@@ -26,7 +26,67 @@ input{
   font-family: 'Roboto Mono','RobotoMono Nerd Font', 'Iosevka', 'Fira Code', monospace;
   font-size: 1em;
 }
+/* custom checkboxes to match inputs/buttons */
+input[type="checkbox"]{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0 6px 0 0;
+  padding: 0;
+  border: 1px solid #3c3c3c;
+  background-color: #252526;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  box-sizing: border-box;
+}
 
+input[type="checkbox"]:hover{
+  background-color: #45454a;
+  cursor: pointer;
+}
+input[type="checkbox"]:active{
+  background-color: #2a2a2f;
+}
+input[type="checkbox"]:focus{
+  outline: 2px solid rgba(79,195,247,0.18);
+  outline-offset: 2px;
+}
+
+/* checked state: filled with accent */
+input[type="checkbox"]:checked{
+  background-color: #4fc3f7;
+  border-color: #4fc3f7;
+}
+
+/* indeterminate state */
+input[type="checkbox"]:indeterminate{
+  background-color: #ffb74d;
+  border-color: #ffb74d;
+}
+input[type="checkbox"]:indeterminate::after{
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 7px;
+  width: 8px;
+  height: 2px;
+  background: #1e1e1e;
+}
+
+/* disabled */
+input[type="checkbox"]:disabled{
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* make labels clickable and consistent */
+label {
+  cursor: pointer;
+  user-select: none;
+}
 button{
   background-color: #303036;
   color: #d4d4d4;
