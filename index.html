@@ -62,13 +62,16 @@
         </li>
         <li>
           <code>dT</code>:
-          <input type="text" id="dTInput" placeholder="1">
-          <p class="subtle">Time step for the simulation. Increase to make it faster, decrease for accuracy.</p>
+          <input type="text" id="dTInput" placeholder="10">
+          <p class="subtle">Time step for the simulation. Increase for speed , decrease for accuracy.<br>
+          Too much dT creates ripple artifacts. The time taken to converge decreases linearly when this increases.<br>
+          Recommended is 10 normally, 20 for faster simulations and 1-5 for accuracy.</p>
+
         </li>
         <li>
           <code>canvasSize</code>:
           <input type="text" id="canvasSizeInput" placeholder="300">
-          <p class="subtle">Size of the canvas in pixels (canvas is square).</p>
+          <p class="subtle">Size of the canvas in pixels (canvas is square). <strong>The time taken increases cubicly with this parameter.</strong></p>
         </li>
       </ul>
       <button onclick="updateParameters()">Update parameters (will reload)</button>
@@ -82,7 +85,7 @@
         const m2 = document.getElementById('m2Input').value || '1';
         const G = document.getElementById('GInput').value || '0.6';
         const Drag = document.getElementById('DragInput').value || '1';
-        const dT = document.getElementById('dTInput').value || '1';
+        const dT = document.getElementById('dTInput').value || '10';
         const canvasSize = document.getElementById('canvasSizeInput').value || '300';
         const url = new URL(window.location.href);
         url.searchParams.set('m1', m1);
