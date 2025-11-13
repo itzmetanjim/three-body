@@ -47,6 +47,7 @@ var G_param=currentURLParams.get("G");
 var dT_param=currentURLParams.get("dT");
 var Drag_param=currentURLParams.get("Drag");
 var canvasSize_param=currentURLParams.get("canvasSize");
+var chaos_param=currentURLParams.get("chaos");
 var r1=r1_param!==null?parseFloat(r1_param):30
 var m1=m1_param!==null?parseFloat(m1_param):10
 var m2=m2_param!==null?parseFloat(m2_param):1
@@ -54,16 +55,24 @@ var G=G_param!==null?parseFloat(G_param):0.6
 var dT=dT_param!==null?parseFloat(dT_param):10
 var Drag=Drag_param!==null?parseFloat(Drag_param):1
 var canvasSize=canvasSize_param!==null?parseInt(canvasSize_param):300
+var chaos=chaos_param!==null
 
 var smobs = []
 var print = console.log
 var pixelColors = []
+var objVels = []
+var basinLayer
 function setup() {
   createCanvas(canvasSize, canvasSize);
   //ensure pixels[] maps 1:1 to canvas
   pixelDensity(1);
   background(30);
   strokeWeight(1);
+  //layer for captured pixels so main canvas can be cleared each frame
+  basinLayer=createGraphics(canvasSize,canvasSize);
+  basinLayer.pixelDensity(1);
+  basinLayer.background(30);
+  basinLayer.strokeWeight(1);
   for (let i = 0; i < width; i++) {
     const row = [];
     for (let j = 0; j < height; j++) {
@@ -90,10 +99,40 @@ function setup() {
     smobs.push(row);
   }
   print("Setup complete with", width * height, "test particles")
+  for(let i=0;i<objs.length;i++){objVels.push({vx:0,vy:0})}
 }
 function do_physics(){
   //use parameterized time step
   const dt = dT 
+  if(chaos){
+    for(let i=0;i<objs.length;i++){
+      for(let j=i+1;j<objs.length;j++){
+        var o1=objs[i];
+        var o2=objs[j];
+        var dx=o2[0]-o1[0];
+        var dy=o2[1]-o1[1];
+        var r2=dx*dx+dy*dy;
+        if(r2<0.01) r2=0.01;
+        var invR=Math.sqrt(1/r2);
+        var invR3=invR*invR*invR;
+        var accelFactor=G*m1*invR3; //accel on each toward the other
+        objVels[i].vx+=dx*accelFactor*dt;
+        objVels[i].vy+=dy*accelFactor*dt;
+        objVels[j].vx-=dx*accelFactor*dt;
+        objVels[j].vy-=dy*accelFactor*dt;
+      }
+    }
+    for(let i=0;i<objs.length;i++){
+      objs[i][0]+=objVels[i].vx*dt;
+      objs[i][1]+=objVels[i].vy*dt;
+      objVels[i].vx*=Drag;
+      objVels[i].vy*=Drag;
+      if(objs[i][0]<0){objs[i][0]=0;objVels[i].vx*=-0.3}
+      if(objs[i][0]>width){objs[i][0]=width;objVels[i].vx*=-0.3}
+      if(objs[i][1]<0){objs[i][1]=0;objVels[i].vy*=-0.3}
+      if(objs[i][1]>height){objs[i][1]=height;objVels[i].vy*=-0.3}
+    }
+  }
   
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < height; j++) {
@@ -139,8 +178,8 @@ function do_physics(){
           smob.capturedBy = k;
           pixelColors[i][j] = k;
           const col = getColor(k);
-          stroke(col[0], col[1], col[2]);
-          point(smob.initialX, smob.initialY);
+          basinLayer.stroke(col[0], col[1], col[2]);
+          basinLayer.point(smob.initialX, smob.initialY);
           break;
         }
       }
@@ -154,7 +193,10 @@ function do_physics(){
 }
 function draw() {
   do_physics()
-  
+  //clear main canvas to avoid trails for moving objects
+  background(30)
+  //draw basin layer (accumulated captured pixels)
+  image(basinLayer,0,0)
   //draw the big objects (planets) on top
   objs.forEach((e,i)=>{
     fill(...getColor(i))
@@ -164,7 +206,6 @@ function draw() {
     stroke(10,10,20)
     ellipse(e[0],e[1],r1*0.6,r1*0.6)
   })
-
 }
 
 
@@ -221,6 +262,7 @@ function mousePressed(event) {
 
 function resetSimulation() {
   background(30)
+  basinLayer.background(30)
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < height; j++) {
       smobs[i][j] = {
@@ -236,6 +278,7 @@ function resetSimulation() {
       pixelColors[i][j] = -1;
     }
   }
+  objVels=[]; for(let i=0;i<objs.length;i++){objVels.push({vx:0,vy:0})}
 }
 function keyPressed() {
   //s to save
