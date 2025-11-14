@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explaination: Three-Body Problem Plot</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5.capture@1.6.0/dist/p5.capture.umd.min.js"></script>
+  </head>
+
+  <body>
+    <h1>Why are there ripples?</h1>
+    <p>When increasing dT too much, you may see this kind of thing: </p>
+    <img src="https://tanjim.org/three-body/ripples.png" alt="Ripples artifact example" style="max-width:600px;">
+    <p>This happens because when dT is lowered, the particle moves more "discretely" and "jaggedly".</p>
+    <p>This causes some particles in repeating distance increments to "miss" the attractor, causing ripples.</p>
+    <img src="https://tanjim.org/three-body/why_ripples.png" alt="Ripples artifact diagram" style="max-width:600px;">
+    <p>In this image you can see how the red particle goes to the attractor and gets colored while the black particle consistently overshoots it.</p>
+    <h1>These streaks in chaos mode</h1>
+    <img src="https://tanjim.org/three-body/chaos.png" alt="Ripples artifact diagram" style="max-width:600px;">
+    <p>You can see streaks of same-colored hollow circles in chaos mode, which are generated when two attractors collide or one attractor<br>
+       collides with the walls.</p>
+    <img src="https://tanjim.org/three-body/streaks.png" alt="Ripples artifact diagram" style="max-width:600px;">
+    <p>These happen because when attractors collide, they start moving very fast in a specified direction. This causes the particles that<br>
+    were "winding around" the attractor to immetiadely collide, and these particles have their initial positions in different circle-shaped<br>
+    regions. Each circle corresponds to a different path of winding around.</p>
+  </body>
+</html>
