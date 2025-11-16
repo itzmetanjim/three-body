@@ -40,5 +40,12 @@
     <p>These happen because when attractors collide, they start moving very fast in a specified direction. This causes the particles that<br>
     were "winding around" the attractor to immetiadely collide, and these particles have their initial positions in different circle-shaped<br>
     regions. Each circle corresponds to a different path of winding around.</p>
+    <h1> Other "artifacts"</h1>
+    <ul>
+      <li>There are many disjoint regions of the same color. Each of them correspond to a different path of winding around.</li>
+      <li>When adding drag, some of the detail in the plot gets reduced. For example, drag 0.999 will look less random than drag 1.</li>
+      <li>The points farthest from the attractors are the most random-looking, with small changes in coordinates causing changes in the color and region sizes becoming smaller.</li>
+      <li>Increasing the radius of attractors also removes detail, because particles require less winding to reach the attractor.</li>
+    </ul>
   </body>
 </html>
